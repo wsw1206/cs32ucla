@@ -99,11 +99,11 @@ int evaluate(string infix, string& postfix, bool& result)
             break;
             
             case '!':
-            while (!opstack.empty() && opstack.top()=='!') {
-                postfix+=opstack.top();
-                //pfstack.push(opstack.top());
-                opstack.pop();
-            }
+//                while (!opstack.empty() && opstack.top()!='(' ){//&& opstack.top()=='!') {
+//                postfix+=opstack.top();
+//                //pfstack.push(opstack.top());
+//                opstack.pop();
+//                }
             opstack.push(infix[i]);
             break;
             
@@ -196,7 +196,10 @@ int evaluate(string infix, string& postfix, bool& result)
 int main()
 {
     string pf;
-    bool answer;
+    bool answer=1;
+    assert(evaluate("T&!(F|T&T|F)|!!!(F&T&F)", pf, answer) == 0   );
+    cout<<pf;
+    //&&  pf == "TFTT&|F|!&FT&F&!!!|"
     assert(evaluate("T| F", pf, answer) == 0  &&  pf == "TF|"  &&  answer);
     assert(evaluate("T|", pf, answer) == 1);
     assert(evaluate("F F", pf, answer) == 1);
